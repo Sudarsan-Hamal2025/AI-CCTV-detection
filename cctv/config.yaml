@@ -1,0 +1,74 @@
+camera:
+  source: 0                       # Fallback single camera config for compatibility
+  width: 640
+  height: 480
+  fps: 15
+  display_feed: true             # Show live feed with detections (testing)
+  id: cam_front
+  name: Front Gate
+  location: Main entrance
+
+cameras:
+  - id: cam_front
+    name: Front Gate
+    location: Main Entrance
+    source: 0
+    width: 640
+    height: 480
+    fps: 15
+    display_feed: true
+  - id: cam_lobby
+    name: Lobby
+    location: Reception
+    source: 1
+    width: 640
+    height: 480
+    fps: 15
+    display_feed: false
+
+detection:
+  model: "yolov8n.pt"           # pre-trained model (nano for testing)
+  confidence: 0.45              # Lower for testing
+  classes: [0]                  # COCO class 0 = person
+  device: "cpu"                 # "cuda" if GPU available
+
+anomaly:
+  loitering:
+    enabled: true
+    duration_sec: 10            # seconds to consider loitering
+    iou_threshold: 0.5          # IoU between consecutive detections
+  crowd_detection:
+    enabled: true
+    min_persons: 2              # alert if 2+ people in frame
+  rapid_movement:
+    enabled: false
+    movement_threshold: 100     # pixels moved between frames
+  theft_detection:
+    enabled: false
+    alert_on_movement: true
+  night_mode:
+    enabled: false              # Disable for testing
+    start_hour: 12
+    end_hour: 6
+    timezone: "UTC"
+
+alert:
+  testing_mode: false             # If true, logs to console instead of Twilio
+  # Twilio credentials removed from repository. Provide these via
+  # environment variables (recommended) or in a local, untracked `.env` file:
+  # TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER, TWILIO_TO_NUMBER
+  twilio:
+    account_sid: ""
+    auth_token: ""
+    from_number: ""
+    to_number: ""
+    voice_message: "Alert! Suspicious activity detected at your location."
+    sms_message: "Alert: Suspicious activity detected."
+  cooldown_seconds: 30           # minimum time between alerts (reduced for testing)
+
+database:
+  path: "events.db"
+
+logging:
+  level: "INFO"
+  file: "surveillance.log"

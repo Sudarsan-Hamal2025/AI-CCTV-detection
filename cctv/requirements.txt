@@ -1,0 +1,56 @@
+# Core Computer Vision & AI
+opencv-python==4.8.1.78
+ultralytics==8.0.196
+numpy==1.24.3
+Pillow==10.0.0
+
+# Web Framework & API
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+jinja2==3.1.2
+
+# Database
+mysql-connector-python==8.1.0
+PyMySQL==1.1.0
+
+# Authentication & Security
+PyJWT==2.8.0
+cryptography==41.0.4
+passlib[bcrypt]==1.7.4
+
+# Configuration & Data Processing
+PyYAML==6.0.1
+python-dotenv==1.0.0
+pandas==2.0.3
+
+# Alert & Communication
+twilio==8.8.0
+requests==2.31.0
+
+# Task Scheduling
+schedule==1.2.0
+
+# Logging & Monitoring
+colorlog==6.7.0
+
+# Development & Testing
+pytest==7.4.2
+pytest-asyncio==0.21.1
+httpx==0.25.0
+
+# Date & Time
+pytz==2023.3
+
+# File Processing
+python-magic==0.4.27
+
+# System Monitoring
+psutil==5.9.5
+
+# Email (for notifications)
+smtplib-ssl==1.0.0
+
+# Additional utilities
+click==8.1.7
+tqdm==4.66.1

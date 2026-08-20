@@ -1,0 +1,76 @@
+camera:
+  source: 0
+  width: 640
+  height: 480
+  fps: 15
+  display_feed: true
+  id: cam_front
+  name: Front Gate
+  location: Main entrance
+
+cameras:
+  - id: cam_front
+    name: Front Gate
+    location: Main Entrance
+    source: 0
+    width: 640
+    height: 480
+    fps: 15
+    display_feed: true
+  - id: cam_lobby
+    name: Lobby
+    location: Reception
+    source: 1
+    width: 640
+    height: 480
+    fps: 15
+    display_feed: false
+
+detection:
+  model: "yolov8n.pt"           # model file (not included in repo by default)
+  confidence: 0.45
+  classes: [0]
+  device: "cpu"
+
+anomaly:
+  loitering:
+    enabled: true
+    duration_sec: 10
+    iou_threshold: 0.5
+  crowd_detection:
+    enabled: true
+    min_persons: 2
+  rapid_movement:
+    enabled: false
+    movement_threshold: 100
+  theft_detection:
+    enabled: false
+    alert_on_movement: true
+  night_mode:
+    enabled: false
+    start_hour: 12
+    end_hour: 6
+    timezone: "UTC"
+
+alert:
+  testing_mode: false
+  twilio:
+    account_sid: "YOUR_TWILIO_ACCOUNT_SID"
+    auth_token: "YOUR_TWILIO_AUTH_TOKEN"
+    from_number: "+1XXXXXXXXXX"
+    to_number: "+REPLACEMENT"
+    voice_message: "Alert! Suspicious activity detected at your location."
+    sms_message: "Alert: Suspicious activity detected."
+  cooldown_seconds: 30
+
+database:
+  path: "events.db"
+
+logging:
+  level: "INFO"
+  file: "surveillance.log"
+
+# Instructions:
+# 1. Copy this file to `config.yaml`.
+# 2. Fill in your Twilio credentials and any other secrets.
+# 3. Do NOT commit `config.yaml` with real credentials; it is ignored by .gitignore.
